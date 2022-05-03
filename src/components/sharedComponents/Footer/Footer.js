@@ -2,7 +2,7 @@ import React from 'react';
 
 const Footer = () => {
     return (
-        <div className='border border-blue-400 p-6'>
+        <div className='border border-blue-400 bg-cyan-900 p-6 text-white'>
             <h1 className='text-center text-3xl text-red-500'>Pay with</h1>
             <ul className='flex justify-center items-center' data-reactid=".23nh5swcuxq.9.2.0.0.b.0.0.0.1.0">
                 <li className="icon w-16" data-reactid=".23nh5swcuxq.9.2.0.0.b.0.0.0.1.0.1"><img

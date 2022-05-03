@@ -7,8 +7,8 @@ const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
     return (
         <div>
-            <nav className="bg-gray-800 py-8 text-center">
-                <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+            <nav className="bg-gradient-to-r from-cyan-900 to-cyan-400 py-8 text-center">
+                <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:bg-cyan-900px-8">
                     <div className="relative flex items-center justify-between h-16">
                         <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
 
