@@ -21,6 +21,9 @@ const Home = () => {
                 </div>
 
             </div>
+            <div className="products-container">
+                
+            </div>
             
         </div>
     );
