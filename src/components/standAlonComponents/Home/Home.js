@@ -1,6 +1,14 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Home.css'
+import Product from './Product/Product';
 const Home = () => {
+    const [products, setProducts] = useState([]);
+    useEffect(() => {
+        fetch('products.json')
+            .then(res => res.json())
+            .then(data => setProducts(data))
+    }, []);
+    console.log(products);
     return (
         <div>
             <div className='banner-container'>
@@ -21,8 +29,15 @@ const Home = () => {
                 </div>
 
             </div>
-            <div className="products-container">
-                
+            <div className="products-container grid grid-cols-1 md:grid-cols-3 gap-x-9">
+                {
+                    products.map(product => <Product
+                        key={product.id}
+                        product={product}
+                    
+                    ></Product>)
+                }
+
             </div>
             
         </div>
