@@ -12,7 +12,7 @@ const Product = ({ product }) => {
             <h5 className='font-semibold'>Price:{price} Tk</h5>
             <p>Choose quantity</p>
             
-            <button onClick={()=>navigate(`/confirmorder/${_id}`)} className='w-40 block mt-5 mx-auto bg-cyan-900 text-gray-50 py-1 rounded-md'>Place Order</button>
+            <button onClick={()=>navigate(`/confirmorder/${_id}`)} className='w-40 block mt-5 mx-auto bg-cyan-900 text-gray-50 py-1 rounded-md'>Buy Now</button>
         </div>
     );
 };
