@@ -23,7 +23,7 @@ const ManageInventory = () => {
             </div>
             
             <div className='w-11/12 mx-auto mb-4'>
-                <button onClick={navigate(``)} className='bg-cyan-900 text-white ml-1/12 rounded-md px-6 py-1 mb-8 '>Add Product</button>
+    
                 <div className="flex flex-col">
                     <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
                         <div className="py-2 inline-block min-w-full sm:px-1 w-1/12 lg:px-8">
