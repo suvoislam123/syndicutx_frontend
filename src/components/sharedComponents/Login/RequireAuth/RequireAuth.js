@@ -2,6 +2,7 @@ import { useAuthState, useSendEmailVerification } from "react-firebase-hooks/aut
 import { Navigate, useLocation } from "react-router-dom";
 import auth from "../../../../firebase.init"
 import Login from '../Login/Login';
+import SendEmailVerification from "./SendEmailVerification";
 
 const RequireAuth=({ children })=>
 {
@@ -16,7 +17,7 @@ const RequireAuth=({ children })=>
     }
     try {
         if (user.providerData[0]?.providerId === 'password' && !user.emailVerified) {
-            return <p>Please verify Your Email</p>
+            return <SendEmailVerification />
         }
     } catch {
         console.log('error occured');

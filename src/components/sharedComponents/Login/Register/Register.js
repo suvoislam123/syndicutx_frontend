@@ -3,6 +3,7 @@ import { getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
 import auth from '../../../../firebase.init';
 import { useNavigate } from 'react-router-dom';
+import Loading from '../../Loading/Loading';
 
 const Register = () => {
     const [errorState, setErrorState] = useState(false);
@@ -36,6 +37,9 @@ const Register = () => {
         await updateProfile({ displayName: fullName });
         console.log('Updated profile');
         
+    }
+    if (updating || loading) {
+        return <Loading />
     }
     if (user) {
         navigate('/home')

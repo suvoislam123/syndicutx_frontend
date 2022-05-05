@@ -4,11 +4,10 @@ import Product from './Product/Product';
 const Home = () => {
     const [products, setProducts] = useState([]);
     useEffect(() => {
-        fetch('products.json')
+        fetch('http://localhost:5000/products')
             .then(res => res.json())
             .then(data => setProducts(data))
     }, []);
-    console.log(products);
     return (
         <div>
             <div className='banner-container'>
@@ -32,7 +31,7 @@ const Home = () => {
             <div className="products-container grid grid-cols-1 md:grid-cols-3 gap-x-9">
                 {
                     products.map(product => <Product
-                        key={product.id}
+                        key={product._id}
                         product={product}
                     
                     ></Product>)
