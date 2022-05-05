@@ -1,14 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import useProductById from '../../../../../hooks/useProductById';
 
 const UpdateInventoryItem = () => {
     const { id } = useParams();
-    const [product, setProduct] = useState({});
-    useEffect(() => {
-        fetch(`http://localhost:5000/products/${id}`)
-        .then(res => res.json())
-        .then(data=>setProduct(data))
-    },[])
+    const [product, setProduct] = useProductById(id);
     return (
         <div>
             <form className='mb-20'>

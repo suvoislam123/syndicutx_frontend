@@ -60,7 +60,7 @@ const AddProduct = () => {
         setCatagory(e.target.value);
         
     }
-    console.log(catagory);
+    console.log(catagory);  
     return (
         <div>
             <form onSubmit={handleAddProduct} className='mb-20'>

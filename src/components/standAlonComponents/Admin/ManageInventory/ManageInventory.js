@@ -1,15 +1,29 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import useProducts from '../../../../hooks/useProducts';
 import ManageInventoryItem from './ManageInventoryItem/ManageInventoryItem';
 const ManageInventory = () => {
     const navigate = useNavigate();
-    const [products, setProducts] = useState([]);
-    useEffect(() => {
-        fetch('http://localhost:5000/products')
+    const [products, setProducts] = useProducts();
+    const handleDelete = (id) => {
+        const proceed = window.confirm('Are you sure to delete the item');
+        if (proceed) {
+            console.log('Item deleted ', id);
+            const url = `http://localhost:5000/products/${id}`;
+            fetch(url, {
+                method: 'DELETE',
+            })
             .then(res => res.json())
-            .then(data => setProducts(data))
-    },[]);
-    
+            .then(data => {
+                console.log(data);
+                const remaining = products.filter(product => product._id !== id);
+                setProducts(remaining);
+            })
+            
+            console.log('deleted');
+        }
+    }
     return (
         <>
             <h1 className='text-xl text-center mt-6'>Search Products Here</h1>
@@ -21,9 +35,9 @@ const ManageInventory = () => {
                     </div>
                 </div>
             </div>
-            
+
             <div className='w-11/12 mx-auto mb-4'>
-    
+
                 <div className="flex flex-col">
                     <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
                         <div className="py-2 inline-block min-w-full sm:px-1 w-1/12 lg:px-8">
@@ -59,7 +73,9 @@ const ManageInventory = () => {
                                         {
                                             products.map(product => <ManageInventoryItem
                                                 key={product._id}
-                                                product={product}>
+                                                product={product}
+                                                handleDelete={handleDelete}
+                                            >
 
                                             </ManageInventoryItem>)
                                         }
@@ -70,7 +86,7 @@ const ManageInventory = () => {
                     </div>
                 </div>
             </div>
-    
+
         </>
     );
 };

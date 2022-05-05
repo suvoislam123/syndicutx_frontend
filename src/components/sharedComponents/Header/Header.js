@@ -12,25 +12,28 @@ const Header = () => {
     const [dashboard, setDashboard] = useState(false);
     const navigate = useNavigate();
     const location = useLocation();
-    const [adminuser, loading]= useAuthState(auth)
+    const [user, loading] = useAuthState(auth);
+    let photoUrL;
     useEffect(() => {
         if (loading) {
             
         }
 
-        if (location.pathname.includes('/admin') && adminuser?.email == 'suvoislam753@gmail.com') {
+        if (location.pathname.includes('/admin') && user?.email == 'suvoislam753@gmail.com') {
             setAdmin(true);
-            console.log(adminuser.email);
+            console.log(user.email);
         }
-        if (adminuser && adminuser?.email == 'suvoislam753@gmail.com') {
+        if (user && user?.email == 'suvoislam753@gmail.com') {
             setDashboard(true);
+            console.log(user?.photoURL);
+            photoUrL = user?.photoURL;
             
         }
         else {
             setAdmin(false)
         }
         
-    }, [location, adminuser]);
+    }, [location, user]);
     const logout = () => {
         signOut(auth);
         setProfileOpen(!profileOpen);
@@ -65,7 +68,7 @@ const Header = () => {
                                 <div className="flex space-x-4 mt-2 ">
                                     <Link to="/home" className=" hover:bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Home</Link>
                                     <Link to="/orders" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">My Orders</Link>
-                                    {admin && <Link to="/admin/orders" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">adminusers Orders</Link>}
+                                    {admin && <Link to="/admin/orders" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">users Orders</Link>}
                                     {admin && <Link to="admin/manageinventory" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Manage Inventory</Link>}
 
                                     <Link to="/blogs" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Blogs</Link>
@@ -74,7 +77,7 @@ const Header = () => {
                             </div>
                         </div>
                         <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                            {adminuser?<button type="button" className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                            {user?<button type="button" className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                                 <span className="sr-only">View notifications</span>
 
                                 <svg className="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -85,20 +88,20 @@ const Header = () => {
 
                             <div className="ml-3 relative">
                                 <div>
-                                    <button type="button" className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" id="adminuser-menu-button" aria-expanded="false" aria-haspopup="true">
-                                        <span className="sr-only">Open adminuser menu</span>
-                                        {adminuser && <img onClick={() => setProfileOpen(!profileOpen)} className="h-8 w-8 md:h-12 md:w-12 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />}
+                                    <button type="button" className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+                                        <span className="sr-only">Open user menu</span>
+                                        {user && <img onClick={() => setProfileOpen(!profileOpen)} className="h-8 w-8 md:h-12 md:w-12 rounded-full" src={photoUrL} alt="" />}
                                     </button>
                                 </div>
 
                                 {/* here custom css     */}
-                                <div className={` z-10 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none  ${ profileOpen && 'hidden'}`} role="menu" aria-orientation="vertical" aria-labelledby="adminuser-menu-button" tabIndex="-1">
+                                <div className={` z-10 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none  ${ profileOpen && 'hidden'}`} role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabIndex="-1">
 
-                                    <p className="block cursor-pointer px-4 py-2 text-sm text-gray-700" role="menuitem" tabIndex="-1" id="adminuser-menu-item-0">Your Profile</p>
-                                    <p className="block cursor-pointer px-4 py-2 text-sm text-gray-700" role="menuitem" tabIndex="-1" id="adminuser-menu-item-1">Settings</p>
-                                    {dashboard && <p onClick={() => { navigate('/admin/manageinventory'); setProfileOpen(!profileOpen); }} className="block cursor-pointer px-4 py-2 text-sm text-gray-700" role="menuitem" tabIndex="-1" id="adminuser-menu-item-2">Go to Admin Mode</p>}
-                                    {dashboard && <p onClick={() => { navigate('/home'); setProfileOpen(!profileOpen); }} className="block cursor-pointer px-4 py-2 text-sm text-gray-700" role="menuitem" tabIndex="-1" id="adminuser-menu-item-2">Go to adminuser Mode</p>}
-                                    <p onClick={()=>logout()} className="block cursor-pointer px-4 py-2 text-sm text-gray-700" role="menuitem" tabIndex="-1" id="adminuser-menu-item-2">Sign out</p>
+                                    <p className="block cursor-pointer px-4 py-2 text-sm text-gray-700" role="menuitem" tabIndex="-1" id="user-menu-item-0">Your Profile</p>
+                                    <p className="block cursor-pointer px-4 py-2 text-sm text-gray-700" role="menuitem" tabIndex="-1" id="user-menu-item-1">Settings</p>
+                                    {dashboard && <p onClick={() => { navigate('/admin/manageinventory'); setProfileOpen(!profileOpen); }} className="block cursor-pointer px-4 py-2 text-sm text-gray-700" role="menuitem" tabIndex="-1" id="user-menu-item-2">Go to Admin Mode</p>}
+                                    {dashboard && <p onClick={() => { navigate('/home'); setProfileOpen(!profileOpen); }} className="block cursor-pointer px-4 py-2 text-sm text-gray-700" role="menuitem" tabIndex="-1" id="user-menu-item-2">Go to user Mode</p>}
+                                    <p onClick={()=>logout()} className="block cursor-pointer px-4 py-2 text-sm text-gray-700" role="menuitem" tabIndex="-1" id="user-menu-item-2">Sign out</p>
                                 </div>
                             </div>
                         </div>
