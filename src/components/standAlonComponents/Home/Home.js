@@ -1,13 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import useProducts from '../../../hooks/useProducts';
 import './Home.css'
 import Product from './Product/Product';
 const Home = () => {
-    const [products, setProducts] = useState([]);
-    useEffect(() => {
-        fetch('http://localhost:5000/products')
-            .then(res => res.json())
-            .then(data => setProducts(data))
-    }, []);
+    const [products, setProducts] = useProducts()
     return (
         <div>
             <div className='banner-container'>

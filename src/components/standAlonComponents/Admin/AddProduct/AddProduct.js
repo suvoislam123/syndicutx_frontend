@@ -42,8 +42,8 @@ const AddProduct = () => {
         const product = {
             name: e.target.name.value,
             image: e.target.image.value,
-            price: e.target.price.value,
-            quantity: e.target.quantity.value,
+            price: parseInt(e.target.price.value),
+            quantity: parseInt(e.target.quantity.value),
             supplier_name: e.target.supplier_name.value,
             catagory: catagory
         }
