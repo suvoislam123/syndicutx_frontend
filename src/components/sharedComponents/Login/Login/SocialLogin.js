@@ -17,7 +17,7 @@ const SocialLogin = () => {
     }
     return (
         <div className='w-80 block mt-4  mx-auto'>
-            <button onClick={()=>signInWithFacebook()}  className="loginBtn loginBtn--facebook w-60">
+            <button onClick={()=>signInWithFacebook()}  className="hidden loginBtn loginBtn--facebook w-60">
                 Login with Facebook
             </button>
             <button onClick={() => signInWithGoogle()} className="loginBtn loginBtn--google w-60  ">

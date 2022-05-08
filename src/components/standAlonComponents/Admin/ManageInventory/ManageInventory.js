@@ -63,6 +63,9 @@ const ManageInventory = () => {
                                             <th scope="col" className="text-sm font-medium text-gray-900 px-1 w-1/12 py-4 text-left">
                                                 SuplierName
                                             </th>
+                                            <th scope="col" className="text-sm font-medium text-gray-900 px-1 w-1/12 py-4 text-left">
+                                                Catagory
+                                            </th>
                                             <th scope="col" colSpan="2" className="text-sm font-medium text-gray-900 px-1 w-1/12 py-4 text-center">
                                                 Operation
                                             </th>

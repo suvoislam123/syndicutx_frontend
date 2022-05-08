@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useAuthState, useSendEmailVerification } from "react-firebase-hooks/auth"
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../../../firebase.init"
+import Loading from "../../Loading/Loading";
 import Login from "../Login/Login";
 const AdminRequireAuth = ({ children }) => {
     const [admin, setAdmin] = useState('');
@@ -10,7 +11,7 @@ const AdminRequireAuth = ({ children }) => {
     const navigate = useNavigate();
     const [sendEmailVerification, sending, error] = useSendEmailVerification(auth);
     if (loading) {
-        return <p>Loading</p>
+        return <Loading/>
     }
     if (!user) {
         navigate('/login');

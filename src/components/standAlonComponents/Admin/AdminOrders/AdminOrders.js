@@ -3,9 +3,6 @@ import useOrders from '../../../../hooks/useOrders';
 import AdminOrdersItem from './AdminOrdersItem/AdminOrdersItem'
 const AdminOrders = () => {
     const [orders, setOrders] = useOrders();
-    const handleDeliver = (id) => {
-        
-    }
     return (
         <div>
             <div className='w-11/12 mx-auto mb-4'>
@@ -49,7 +46,12 @@ const AdminOrders = () => {
                                     <tbody>
                                       {
                                             orders.map(order => <AdminOrdersItem
-                                            order={order}
+                                            key={order._id}    
+                                                order={order}
+                                                orders={orders}
+                                                setOrders={setOrders}
+                                               
+                                                
                                             ></AdminOrdersItem>) 
                                       }
                                     </tbody>

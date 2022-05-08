@@ -16,7 +16,7 @@ const Header = () => {
     let photoUrL;
     useEffect(() => {
         if (loading) {
-            
+
         }
 
         if (location.pathname.includes('/admin') && user?.email == 'suvoislam753@gmail.com') {
@@ -27,12 +27,12 @@ const Header = () => {
             setDashboard(true);
             console.log(user?.photoURL);
             photoUrL = user?.photoURL;
-            
+
         }
         else {
             setAdmin(false)
         }
-        
+
     }, [location, user]);
     const logout = () => {
         signOut(auth);
@@ -62,7 +62,7 @@ const Header = () => {
                         <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
                             <div className="flex-shrink-0 flex items-center">
                                 <img className="block lg:hidden h-8 md:h-12 w-auto" src={logo} alt="Workflow" />
-                                <img className="hidden lg:block h-8 md:h-12 w-auto" src={logo} alt="Workflow" /> <h5 className='font-semibold text-white text-xl md:text-4xl ml-2 md:ml-6'>Syndicut<span className='text-red-600'>X</span> Shop</h5>
+                                <img className="hidden lg:block h-8 md:h-12 w-auto" src={logo} alt="Workflow" /> <h5 className='font-semibold text-white text-lg md:text-4xl ml-2 md:ml-6'>Syndicut<span className='text-red-600'>X</span> Shop</h5>
                             </div>
                             <div className="hidden sm:block sm:ml-6">
                                 <div className="flex space-x-4 mt-2 ">
@@ -77,13 +77,13 @@ const Header = () => {
                             </div>
                         </div>
                         <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                            {user?<button type="button" className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                            {user ? <button type="button" className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                                 <span className="sr-only">View notifications</span>
 
                                 <svg className="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
                                 </svg>
-                            </button>:<button className='text-white' onClick={()=>navigate('/login')}>Login</button>}
+                            </button> : <button className='text-white' onClick={() => navigate('/login')}>Login</button>}
 
 
                             <div className="ml-3 relative">
@@ -95,13 +95,12 @@ const Header = () => {
                                 </div>
 
                                 {/* here custom css     */}
-                                <div className={` z-10 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none  ${ profileOpen && 'hidden'}`} role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabIndex="-1">
+                                <div className={` z-10 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none  ${profileOpen && 'hidden'}`} role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabIndex="-1">
 
                                     <p className="block cursor-pointer px-4 py-2 text-sm text-gray-700" role="menuitem" tabIndex="-1" id="user-menu-item-0">Your Profile</p>
                                     <p className="block cursor-pointer px-4 py-2 text-sm text-gray-700" role="menuitem" tabIndex="-1" id="user-menu-item-1">Settings</p>
                                     {dashboard && <p onClick={() => { navigate('/admin/manageinventory'); setProfileOpen(!profileOpen); }} className="block cursor-pointer px-4 py-2 text-sm text-gray-700" role="menuitem" tabIndex="-1" id="user-menu-item-2">Go to Admin Mode</p>}
-                                    {dashboard && <p onClick={() => { navigate('/home'); setProfileOpen(!profileOpen); }} className="block cursor-pointer px-4 py-2 text-sm text-gray-700" role="menuitem" tabIndex="-1" id="user-menu-item-2">Go to user Mode</p>}
-                                    <p onClick={()=>logout()} className="block cursor-pointer px-4 py-2 text-sm text-gray-700" role="menuitem" tabIndex="-1" id="user-menu-item-2">Sign out</p>
+                                    <p onClick={() => logout()} className="block cursor-pointer px-4 py-2 text-sm text-gray-700" role="menuitem" tabIndex="-1" id="user-menu-item-2">Sign out</p>
                                 </div>
                             </div>
                         </div>
@@ -117,19 +116,19 @@ const Header = () => {
                     leaveFrom="opacity-100 scale-100"
                     leaveTo="opacity-0 scale-95"
                 >
-                <div className="sm:hidden" id="mobile-menu">
-                    <div className="px-2 pt-2 pb-3 space-y-1">
+                    <div className="sm:hidden" id="mobile-menu">
+                        <div className="px-2 pt-2 pb-3 space-y-1">
 
-                        <Link to="/home" className=" text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page">Home</Link>
+                            <Link to="/home" className=" text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page">Home</Link>
 
-                        <Link to="/orders" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Orders</Link>
+                            <Link to="/orders" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Orders</Link>
 
-                        <a href="#" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Inventory</a>
+                            {admin && <Link to="/admin/manageinventory" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Manage Inventory </Link>}
 
-                        <a href="#" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Blogs</a>
-                        <a href="#" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">About</a>
+                            <Link to="/blogs" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Blogs</Link>
+                            <Link to="/about" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">About</Link>
+                        </div>
                     </div>
-                </div>
                 </Transition>
             </nav>
 

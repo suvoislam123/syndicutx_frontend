@@ -2,7 +2,10 @@ import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import useProductById from '../../../../hooks/useProductById';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from '../../../../firebase.init';
 const ConfirmOrder = () => {
+    const [user, loading, error] = useAuthState(auth);
     const { id } = useParams();
     const navigate = useNavigate();
     const [product, setProduct] = useProductById(id);
@@ -11,10 +14,12 @@ const ConfirmOrder = () => {
     const [selectedQuantity, setSeletedQuantity] = useState(1);
     const [deleveryCharge, setDelveryCharge] = useState(20);
     const [phone, setPhone] = useState('');
-    const [email, setEmail] = useState('');
+    const [email, setEmail] = useState(user?.email);
     const [address, setAddress] = useState('');
+    console.log(quantity)
     const arr = [...Array(quantity).keys()];
     arr.shift();
+    arr.push(quantity);
     useEffect(() => {
         setTotalExpense(price * (selectedQuantity));
     }, [price, selectedQuantity]);
@@ -83,9 +88,9 @@ const ConfirmOrder = () => {
                     <label className='block' htmlFor="Phone Number"> Your Phone Number</label>
                     <input onChange={(e)=>setPhone(e.target.value)}  className=' block border-2 border-cyan-900 px-2 py-1 rounded-sm' type="tel" name="phone" placeholder="123-45-678"  required></input>
                     <label className='block' htmlFor="Email"> Your Email</label>
-                    <input onChange={(e)=>setEmail(e.target.value)}  className=' block border-2 border-cyan-900 px-2 py-1 rounded-sm' type="email" name="phone" placeholder="example@gmail.com" required></input>
+                    <input onChange={(e)=>setEmail(e.target.value)} value={email} className=' block border-2 border-cyan-900 px-2 py-1 rounded-sm' type="email" name="phone" placeholder="example@gmail.com" required readOnly></input>
                     <label className='block' htmlFor="Address"> Your Address</label>
-                    <input onChange={(e)=>setAddress(e.target.value)}  className=' block border-2 border-cyan-900 px-2 py-1 rounded-sm' type="text" name="address" placeholder="Your address" required></input>
+                    <input onChange={(e)=>setAddress(e.target.value)}  className=' block border-2 border-cyan-900 px-2 py-1 rounded-sm' type="text" name="address" placeholder="Your address" required ></input>
                     <p className='mt-2'>Delevery Charge: {deleveryCharge} Tk </p>
                     <p>Total Charge: {totalExpens + deleveryCharge} TK</p>
                 </form>
